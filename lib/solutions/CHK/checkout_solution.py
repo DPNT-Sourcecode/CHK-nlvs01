@@ -16,7 +16,7 @@ def checkout(skus):
         if s == 'A':
             offer_five = 0
             offer_three = 0
-            while quantity > 3:
+            while quantity >= 3:
                 if quantity / 5 > 0:
                     offer_five = quantity / 5
                     quantity = quantity % 5
@@ -39,3 +39,5 @@ def checkout(skus):
         else:
             return -1
     return sum(prices)
+
+
