@@ -9,7 +9,7 @@ def checkout(skus):
             to_remove = quantity / 2
             for i in range(to_remove):
                 if 'B' in skus:
-                    skus.pop(skus.index('B'))
+                    skus = skus.replace('B', '')
     prices = []
     for s in set(skus):
         quantity = skus.count(s)
