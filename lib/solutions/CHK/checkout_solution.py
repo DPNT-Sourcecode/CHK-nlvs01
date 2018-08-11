@@ -44,7 +44,7 @@ def remove_free_items(skus):
 
 
 def any_of_three(skus, bill):
-    skus_copy = skus.copy()
+    skus_copy = [i for i in skus]
     def pop_items(skus_copy, items_to_pop):
         for i in items_to_pop:
             skus_copy.pop(skus.index(i))
