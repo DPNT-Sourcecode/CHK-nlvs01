@@ -44,13 +44,14 @@ def remove_free_items(skus):
 
 
 def any_of_three(skus, bill):
-    def pop_items(indexes):
-        for ix in indexes:
-            skus.pop(ix)
+    def pop_items(items_to_pop):
+        for i in items_to_pop:
+            skus.pop(skus.index(i))
     count = 0
     tot = 0
-    indexes = []
-    for i, item in enumerate(skus):
+    to_pop = []
+    last_item = None
+    for item in skus:
         if item in 'STXYZ':
             bill[item] = {
                 'standard':
@@ -58,12 +59,14 @@ def any_of_three(skus, bill):
                 'offers': [],
             }
             count += 1
-            indexes.append(i)
+            to_pop.append(item)
         if count == 3:
             count = 0
             tot += 1
-            pop_items(indexes)
-            bill[item]['offers'].append({'items': 1, 'price': 45})
+            pop_items(to_pop)
+            last_item = item
+    if last_item is not None:
+        bill[last_item]['offers'].append({'items': tot, 'price': 45})
     return skus, bill
 
 def process_bill(bill):
