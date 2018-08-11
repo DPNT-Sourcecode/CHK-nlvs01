@@ -156,3 +156,6 @@ def checkout(skus):
         bill[s]['standard']['price'] = unit_price
 
     return process_bill(bill)
+
+
+checkout('STX')
