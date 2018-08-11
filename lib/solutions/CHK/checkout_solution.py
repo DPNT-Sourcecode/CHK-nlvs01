@@ -130,7 +130,7 @@ def checkout(skus):
             unit_price = 50
         else:
             return -1
-        if s in ('s', 't', 'x', 'y', 'z'):
+        if s in ('S', 'T', 'X', 'Y', 'Z'):
             offers = ((3, unit_price),)
         bill, quantity = calculate_offers(bill, s, quantity, offers)
         bill[s]['standard']['items'] = quantity
