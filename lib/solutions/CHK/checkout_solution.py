@@ -55,13 +55,11 @@ def any_of_three(skus, bill):
     while skus:
         for item in skus:
             if item in 'STXYZ':
-                if 'offers' not in bill[item]:
+                if item not in bill:
                     bill[item] = {
+                        'standard':
+                            {'items': 0, 'price': 0},
                         'offers': [],
-                    }
-                if 'standard' not in bill[item]:
-                    bill[item] = {
-                        'standard': {'items': 0, 'price': 0},
                     }
                 count += 1
                 to_pop.append(item)
@@ -171,4 +169,4 @@ def checkout(skus):
     return process_bill(bill)
 
 
-checkout('STXSTX')
+print(checkout('STXSTX'))
