@@ -19,7 +19,7 @@ def get_free_items(skus_items, offer_type, offer_quantity, free_item):
 
 
 def checkout(skus):
-    skus = [c for c in skus]
+    skus = sorted([c for c in skus])
     # items to remove
     for s in set(skus):
         quantity = skus.count(s)
