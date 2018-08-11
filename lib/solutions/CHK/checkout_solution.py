@@ -12,7 +12,7 @@ def checkout(skus):
             }
         },
         'B': {
-            'price': 50,
+            'price': 30,
             'offer': {
                 'items': 2,
                 'price': 45
