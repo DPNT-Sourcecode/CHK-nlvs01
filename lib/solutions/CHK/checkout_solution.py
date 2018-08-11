@@ -93,8 +93,8 @@ def checkout(skus):
         elif s == 'J':
             unit_price = 60
         elif s == 'K':
-            unit_price = 80
-            offers = ((2, 150),)
+            unit_price = 70
+            offers = ((2, 120),)
         elif s == 'L':
             unit_price = 90
         elif s == 'M':
