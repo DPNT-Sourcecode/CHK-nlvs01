@@ -70,7 +70,8 @@ def any_of_three(skus, bill):
                 to_pop = []
                 last_item = item
                 continue
-        if tot == 0:
+        print(0)
+        if count == 0:
             break
     if last_item is not None:
         bill[last_item]['offers'].append({'items': tot, 'price': 45})
