@@ -96,11 +96,12 @@ def checkout(skus):
     for s in set(skus):
         quantity = skus.count(s)
         offers = tuple()
-        bill[s] = {
-            'standard':
-                {'items': 0, 'price': 0},
-            'offers': [],
-        }
+        if s not in bill:
+            bill[s] = {
+                'standard':
+                    {'items': 0, 'price': 0},
+                'offers': [],
+            }
         if s == 'A':
             unit_price = 50
             offers = ((5, 200), (3, 130))
