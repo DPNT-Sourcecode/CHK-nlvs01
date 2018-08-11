@@ -46,11 +46,14 @@ def checkout(skus):
                         if free_item in skus:
                             skus.pop(free_item)
     for s in set(skus):
-        quantity = skus.count(s)
         if s in skus_lookup:
+            quantity = skus.count(s)
             item = skus_lookup[s]
             item_price = 0
-            if 'offer' in item:
+            if 'offers' in item:
+                offer_quantities = sorted(item['offers'].keys())
+                if all(quantity % x == 0 for x in offer_quantities):
+
                 if quantity >= item['offer']['items']:
                     offer_items = quantity / item['offer']['items']
                     normal_items = quantity % item['offer']['items']
