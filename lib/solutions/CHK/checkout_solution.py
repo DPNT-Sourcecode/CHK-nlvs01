@@ -108,7 +108,7 @@ def checkout(skus):
             unit_price = 20
         elif s == 'U':
             unit_price = 40
-            offer_quantity = 3
+            offer_quantity = 4
             free_item = 'U'
         elif s == 'V':
             unit_price = 50
