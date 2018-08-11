@@ -54,7 +54,7 @@ def checkout(skus):
         }
         if s == 'A':
             unit_price = 50
-            offers = ((3, 130), (5, 200))
+            offers = ((5, 200), (3, 130))
         elif s == 'B':
             unit_price = 30
             offers = ((2, 45),)
@@ -74,7 +74,7 @@ def checkout(skus):
             unit_price = 20
         elif s == 'H':
             unit_price = 10
-            offers = ((5, 45), (10, 80))
+            offers = ((10, 80), (5, 45))
         elif s == 'I':
             unit_price = 35
         elif s == 'J':
@@ -112,7 +112,7 @@ def checkout(skus):
             free_item = 'U'
         elif s == 'V':
             unit_price = 50
-            offers = ((2, 90), (3, 130))
+            offers = ((3, 130), (2, 90))
         elif s == 'W':
             unit_price = 20
         elif s == 'X':
