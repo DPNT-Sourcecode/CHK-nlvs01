@@ -59,8 +59,8 @@ def process_bill(bill):
 
 def checkout(skus):
     skus = sorted([c for c in skus])
+    bill = dict()
     skus = remove_free_items(skus)
-    skus, bill = process_
     for s in set(skus):
         quantity = skus.count(s)
         offers = tuple()
