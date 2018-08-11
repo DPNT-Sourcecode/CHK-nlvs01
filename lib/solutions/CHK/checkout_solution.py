@@ -6,7 +6,7 @@ def checkout(skus):
     skus = [c for c in skus]
     for s in set(skus):
         quantity = skus.count(s)
-        if s == 'E' and quantity % 2 == 0 and 'B' in skus:
+        if s == 'E' and quantity / 2 > 0 and 'B' in skus:
             to_remove = quantity / 2
             for i in range(to_remove):
                 if 'B' in skus:
@@ -42,4 +42,4 @@ def checkout(skus):
     return sum(prices)
 
 
-checkout('EEB')
+checkout('EEEB')
