@@ -20,33 +20,18 @@ def get_free_items(skus_items, offer_type, offer_quantity, free_item):
 
 def checkout(skus):
     skus = sorted([c for c in skus])
-    # items to remove
-    for s in set(skus):
-        quantity = skus.count(s)
-        if s == 'E' and quantity / 2 > 0 and 'B' in skus:
-            skus = get_free_items(skus, 'E', 2, 'B')
-        if s == 'F' and quantity / 3 > 0:
-            skus = get_free_items(skus, 'F', 3, 'F')
-        if s == 'N' and quantity / 3 > 0 and 'M' in skus:
-            skus = get_free_items(skus, 'N', 3, 'M')
-        if s == 'R' and quantity / 3 > 0 and 'Q' in skus:
-            skus = get_free_items(skus, 'R', 3, 'Q')
-        if s == 'U' and quantity / 3 > 0:
-            skus = get_free_items(skus, 'U', 3, 'U')
-
-    prices = []
+    bill = dict()
     for s in set(skus):
         quantity = skus.count(s)
         if s == 'A':
-            offer_five = 0
-            offer_three = 0
-            while quantity >= 3:
-                if quantity / 5 > 0:
-                    offer_five = quantity / 5
-                    quantity = quantity % 5
-                if quantity / 3 > 0:
-                    offer_three = quantity / 3
-                    quantity = quantity % 3
+            if quantity / 5 > 0:
+                bill[s] = {'offers': [
+                    {'items': quantity / 5, 'price': 130}
+                ]}
+                quantity = quantity % 5
+            if quantity / 3 > 0:
+                offer_three = quantity / 3
+                quantity = quantity % 3
             prices.append(sum([offer_five * 200, offer_three * 130, quantity * 50]))
         elif s == 'B':
             offer_two = 0
