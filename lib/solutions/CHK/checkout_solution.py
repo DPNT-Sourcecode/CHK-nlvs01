@@ -56,6 +56,7 @@ def process_bill(bill):
             bill_tot.append(items * price)
     return sum(bill_tot)
 
+
 def checkout(skus):
     skus = sorted([c for c in skus])
     bill = dict()
@@ -129,7 +130,10 @@ def checkout(skus):
             unit_price = 50
         else:
             return -1
+        if s in ('s', 't', 'x', 'y', 'z'):
+            offers = ((3, unit_price),)
         bill, quantity = calculate_offers(bill, s, quantity, offers)
         bill[s]['standard']['items'] = quantity
         bill[s]['standard']['price'] = unit_price
+
     return process_bill(bill)
