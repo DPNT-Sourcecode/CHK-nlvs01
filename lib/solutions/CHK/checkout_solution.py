@@ -27,9 +27,9 @@ def checkout(skus):
 
     }
     prices = []
-    skus_lower = skus.lower()
-    for s in set(skus_lower):
-        quantity = skus_lower.count(s)
+    skus = skus.upper()
+    for s in set(skus):
+        quantity = skus.count(s)
         item = skus_lookup[s]
         item_price = 0
         if s in skus_lookup:
@@ -46,3 +46,7 @@ def checkout(skus):
                 item_price = item['price'] * quantity
             prices.append(item_price)
     return sum(prices)
+
+
+
+checkout('AAABBACC')
