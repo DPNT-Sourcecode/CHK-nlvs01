@@ -164,4 +164,4 @@ def checkout(skus):
     return process_bill(bill)
 
 
-checkout('STX')
+checkout('STXSTX')
