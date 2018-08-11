@@ -43,6 +43,26 @@ def remove_free_items(skus):
     return skus
 
 
+def any_of_three(skus, bill):
+    def pop_items(indexes):
+        for ix in indexes:
+            skus.pop(ix)
+    count = 0
+    indexes = []
+    for i, item in enumerate(skus):
+        if item in 'STXYZ':
+            count += 0
+            indexes.append(i)
+        if count == 3:
+            count = 0
+            pop_items(indexes)
+        bill[item] = {
+            'standard':
+                {'items': 0, 'price': 0},
+            'offers': [{'items': 1, 'price': 45}],
+        }
+    return skus, bill
+
 def process_bill(bill):
     bill_tot = list()
     for v in bill.values():
@@ -61,6 +81,7 @@ def checkout(skus):
     skus = sorted([c for c in skus])
     bill = dict()
     skus = remove_free_items(skus)
+    skus, bill = any_of_three(skus, bill)
     for s in set(skus):
         quantity = skus.count(s)
         offers = tuple()
