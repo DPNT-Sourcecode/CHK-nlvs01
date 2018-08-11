@@ -128,3 +128,7 @@ def checkout(skus):
         bill[s]['standard']['price'] = unit_price
         bill = get_free_item(bill, quantity, offer_quantity, free_item)
     return process_bill(bill)
+
+
+
+checkout('EEEEBB')
