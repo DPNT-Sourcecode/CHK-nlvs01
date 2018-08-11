@@ -46,9 +46,8 @@ def checkout(skus):
                 item_price = item['price'] * quantity
             prices.append(item_price)
         else:
-            return -1
+            prices.append(-1)
     return sum(prices)
-
 
 
 checkout('AAABBACC')
