@@ -27,15 +27,14 @@ def get_free_item(bill, quantity, offer_quantity, free_item):
 
 def process_bill(bill):
     bill_tot = list()
-    for k, v in bill.items():
-        standard_items = bill['standard']['items']
-        standard_price = bill['standard']['price']
-        standard_tot = standard_items * standard_price
-        bill_tot.append(bill_tot)
-        item_offers = bill['offers']
+    for v in bill.values():
+        standard_items = v['standard']['items']
+        standard_price = v['standard']['price']
+        bill_tot.append(standard_items * standard_price)
+        item_offers = v['offers']
         for o in item_offers:
-            items = item_offers['items']
-            price = item_offers['price']
+            items = o['items']
+            price = o['price']
             bill_tot.append(items * price)
     return sum(bill_tot)
 
@@ -129,6 +128,3 @@ def checkout(skus):
         bill[s]['standard']['price'] = unit_price
         bill = get_free_item(bill, quantity, offer_quantity, free_item)
     return process_bill(bill)
-
-
-print(checkout('EEEB'))
