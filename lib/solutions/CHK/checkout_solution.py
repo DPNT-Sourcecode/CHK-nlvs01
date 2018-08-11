@@ -31,14 +31,15 @@ def checkout(skus):
         quantity = skus.count(s)
         item = skus_lookup[s]
         item_price = 0
-        if 'offer' in item:
-            if quantity >= item['offer']['items']:
-                offer_items = quantity / item['offer']['items']
-                normal_items = quantity % item['offer']['items']
-                offer_price = offer_items * item['offer']['price']
-                normal_price = normal_items * item['price']
-                item_price = sum([normal_price, offer_price])
-        else:
-            item_price = item['price'] * quantity
-        prices.append(item_price)
+        if s in skus_lookup:
+            if 'offer' in item:
+                if quantity >= item['offer']['items']:
+                    offer_items = quantity / item['offer']['items']
+                    normal_items = quantity % item['offer']['items']
+                    offer_price = offer_items * item['offer']['price']
+                    normal_price = normal_items * item['price']
+                    item_price = sum([normal_price, offer_price])
+            else:
+                item_price = item['price'] * quantity
+            prices.append(item_price)
     return sum(prices)
