@@ -55,17 +55,21 @@ def any_of_three(skus, bill):
     while skus:
         for item in skus:
             if item in 'STXYZ':
-                bill[item] = {
-                    'standard':
-                        {'items': 0, 'price': 0},
-                    'offers': [],
-                }
+                if 'offers' not in bill[item]:
+                    bill[item] = {
+                        'offers': [],
+                    }
+                if 'standard' not in bill[item]:
+                    bill[item] = {
+                        'standard': {'items': 0, 'price': 0},
+                    }
                 count += 1
                 to_pop.append(item)
             if count == 3:
                 count = 0
                 tot += 1
                 skus = pop_items(to_pop)
+                to_pop = []
                 last_item = item
                 continue
     if last_item is not None:
