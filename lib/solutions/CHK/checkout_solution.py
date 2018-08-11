@@ -13,17 +13,33 @@ def calculate_offers(bill, item, quantity, offers):
         quantity = quantity % offer
     return bill, quantity
 
-
-def get_free_item(bill, quantity, offer_quantity, free_item):
-    bill = bill.copy()
-    if free_item in bill:
+def remove_free_items(skus):
+    def remove_free_item(quantity, offer_quantity, free_item):
         to_remove = quantity / offer_quantity
-        new_quantity = bill[free_item]['standard']['items'] - to_remove
-        if new_quantity > 0:
-            bill[free_item]['standard']['items'] = new_quantity
-        else:
-            bill[free_item]['standard']['items'] = 0
-    return bill
+        for t in range(to_remove):
+            if free_item in skus:
+                skus = skus.pop(skus.index(free_item))
+    for s in set(skus):
+        offer_quantity, free_item = 0, None
+        quantity = skus.count(s)
+        if s == 'E':
+            offer_quantity = 2
+            free_item = 'B'
+        elif s == 'F':
+            offer_quantity = 3
+            free_item = 'F'
+        elif s == 'N':
+            offer_quantity = 3
+            free_item = 'M'
+        elif s == 'R':
+            offer_quantity = 3
+            free_item = 'Q'
+        elif s == 'U':
+            offer_quantity = 4
+            free_item = 'U'
+        remove_free_item(quantity, offer_quantity, free_item)
+    return skus
+
 
 def process_bill(bill):
     bill_tot = list()
@@ -41,6 +57,7 @@ def process_bill(bill):
 def checkout(skus):
     skus = sorted([c for c in skus])
     bill = dict()
+    skus = remove_free_items(skus)
     for s in set(skus):
         quantity = skus.count(s)
         unit_price = 0
