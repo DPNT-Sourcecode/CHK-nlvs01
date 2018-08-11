@@ -51,7 +51,8 @@ def any_of_three(skus, bill):
         'Y': 20,
         'Z': 21,
     }
-    skus_copy = sorted([i for i in skus], key=lambda x: price_lookup[x], reverse=True)
+    skus = sorted(skus, key=lambda x: price_lookup[x], reverse=True)
+    skus_copy = [i for i in skus]
     def pop_items(skus_copy, items_to_pop):
         for i in items_to_pop:
             skus_copy.pop(skus_copy.index(i))
@@ -176,5 +177,3 @@ def checkout(skus):
 
     return process_bill(bill)
 
-
-print(checkout("ZZZS"))
