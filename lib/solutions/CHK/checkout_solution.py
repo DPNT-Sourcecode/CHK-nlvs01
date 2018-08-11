@@ -70,6 +70,8 @@ def any_of_three(skus, bill):
                 to_pop = []
                 last_item = item
                 break
+        if count < 3:
+            break
     if last_item is not None:
         bill[last_item]['offers'].append({'items': tot, 'price': 45})
     return skus, bill
@@ -171,4 +173,4 @@ def checkout(skus):
     return process_bill(bill)
 
 
-print(checkout("S"))
+print(checkout("ABCDEFGHIJKLMNOPQRSTUVW"))
