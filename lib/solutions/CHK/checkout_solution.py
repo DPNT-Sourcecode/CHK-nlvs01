@@ -6,16 +6,15 @@ def checkout(skus):
     skus_lookup = {
         'A': {
             'price': 50,
-            'offer': {
-                'items': 3,
-                'price': 130
+            'offers': {
+                3: 130,
+                5: 200,
             }
         },
         'B': {
             'price': 30,
-            'offer': {
-                'items': 2,
-                'price': 45
+            'offers': {
+                2: 45
             }
         },
         'C': {
@@ -24,9 +23,28 @@ def checkout(skus):
         'D': {
             'price': 15
         },
+        'E': {
+            'price': 40
+        },
 
     }
+    multi_prices_lookup = {
+        'E': {
+            'quantity': 2,
+            'item': 'B'
+        }
+    }
     prices = []
+    for s in set(skus):
+        if s in multi_prices_lookup:
+            free_item = multi_prices_lookup[s]['item']
+            if free_item in skus:
+                quantity = skus.count(s)
+                if quantity >= multi_prices_lookup[s]['quantity']:
+                    to_remove = quantity / multi_prices_lookup[s]['quantity']
+                    for t in range(to_remove):
+                        if free_item in skus:
+                            skus.pop(free_item)
     for s in set(skus):
         quantity = skus.count(s)
         if s in skus_lookup:
