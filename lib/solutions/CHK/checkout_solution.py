@@ -27,12 +27,11 @@ def checkout(skus):
 
     }
     prices = []
-    skus = skus.upper()
     for s in set(skus):
         quantity = skus.count(s)
-        item = skus_lookup[s]
-        item_price = 0
         if s in skus_lookup:
+            item = skus_lookup[s]
+            item_price = 0
             if 'offer' in item:
                 if quantity >= item['offer']['items']:
                     offer_items = quantity / item['offer']['items']
