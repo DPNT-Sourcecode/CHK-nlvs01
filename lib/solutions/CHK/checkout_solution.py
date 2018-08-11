@@ -37,6 +37,10 @@ def checkout(skus):
             prices.append(quantity * 15)
         elif s == 'E':
             prices.append(quantity * 40)
+        elif s == 'F':
+            offers = quantity / 2
+            quantity = quantity % 2
+            prices.append(sum([offerquantity * 10)
         else:
             return -1
     return sum(prices)
