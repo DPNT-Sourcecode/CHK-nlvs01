@@ -29,7 +29,7 @@ def checkout(skus):
     prices = []
     skus_lower = skus.lower()
     for s in set(skus_lower):
-        quantity = skus.count(s)
+        quantity = skus_lower.count(s)
         item = skus_lookup[s]
         item_price = 0
         if s in skus_lookup:
