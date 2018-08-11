@@ -52,7 +52,7 @@ def any_of_three(skus, bill):
     tot = 0
     to_pop = []
     last_item = None
-    while any(c in 'STXYZ' for c in skus) and len(skus) >= 3:
+    while len(skus) >= 3 and any(c in 'STXYZ' for c in skus):
         for item in skus:
             if item in 'STXYZ':
                 if item not in bill:
