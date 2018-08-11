@@ -171,4 +171,4 @@ def checkout(skus):
     return process_bill(bill)
 
 
-checkout("")
+print(checkout("AAAAAPPPPPUUUUEEBRRRQAAAHHHHHHHHHHKKVVVBBNNNMFFFQQQVVHHHHHSTX"))
