@@ -13,12 +13,13 @@ def calculate_offers(bill, item, quantity, offers):
         quantity = quantity % offer
     return bill, quantity
 
+
 def remove_free_items(skus):
     def remove_free_item(quantity, offer_quantity, free_item):
         to_remove = quantity / offer_quantity
         for t in range(to_remove):
             if free_item in skus:
-                skus = skus.pop(skus.index(free_item))
+                skus.pop(skus.index(free_item))
     for s in set(skus):
         offer_quantity, free_item = 0, None
         quantity = skus.count(s)
@@ -37,6 +38,8 @@ def remove_free_items(skus):
         elif s == 'U':
             offer_quantity = 4
             free_item = 'U'
+        else:
+            continue
         remove_free_item(quantity, offer_quantity, free_item)
     return skus
 
@@ -143,7 +146,6 @@ def checkout(skus):
         bill, quantity = calculate_offers(bill, s, quantity, offers)
         bill[s]['standard']['items'] = quantity
         bill[s]['standard']['price'] = unit_price
-        bill = get_free_item(bill, quantity, offer_quantity, free_item)
     return process_bill(bill)
 
 
