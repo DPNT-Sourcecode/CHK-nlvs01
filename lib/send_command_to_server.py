@@ -52,7 +52,7 @@ from runner.user_input_action import get_user_input
 
 runner = QueueBasedImplementationRunnerBuilder()\
     .set_config(Utils.get_runner_config())\
-    .with_solution_for('sum', sum_solution)\
+    .with_solution_for('sum', sum_solution.compute)\
     .with_solution_for('hello', hello_solution.hello)\
     .with_solution_for('fizz_buzz', fizz_buzz_solution.fizz_buzz)\
     .with_solution_for('checkout', checkout_solution.checkout)\
