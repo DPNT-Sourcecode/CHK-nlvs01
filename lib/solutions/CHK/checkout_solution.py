@@ -89,6 +89,8 @@ def process_bill(bill):
 
 
 def checkout(skus):
+    if not skus:
+        return -1
     skus = sorted([c for c in skus])
     bill = dict()
     skus = remove_free_items(skus)
