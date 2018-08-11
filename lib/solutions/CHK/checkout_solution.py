@@ -14,11 +14,28 @@ def checkout(skus):
     for s in set(skus):
         quantity = skus.count(s)
         if s == 'A':
-            if quantity > 5:
-                on_offer = quantity / 5
-
-
-
-
-
+            offer_five = 0
+            offer_three = 0
+            while quantity > 3:
+                if quantity / 5 > 0:
+                    offer_five = quantity / 5
+                    quantity = quantity % 5
+                if quantity / 3 > 0:
+                    offer_three = quantity / 3
+                    quantity = quantity % 3
+            prices.append(sum([offer_five * 200, offer_three * 150, quantity *  50]))
+        elif s == 'B':
+            offer_two = 0
+            if quantity >= 2:
+                offer_two = quantity / 2
+                quantity = quantity % 2
+            prices.append(sum([offer_two * 45, quantity * 30]))
+        elif s == 'C':
+            prices.append(quantity * 20)
+        elif s == 'D':
+            prices.append(quantity * 15)
+        elif s == 'E':
+            prices.append(quantity * 40)
+        else:
+            return -1
     return sum(prices)
