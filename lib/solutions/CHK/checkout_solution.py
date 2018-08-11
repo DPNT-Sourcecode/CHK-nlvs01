@@ -26,7 +26,18 @@ def get_free_item(bill, quantity, offer_quantity, free_item):
     return bill
 
 def process_bill(bill):
-    print(0)
+    bill_tot = list()
+    for k, v in bill.items():
+        standard_items = bill['standard']['items']
+        standard_price = bill['standard']['price']
+        standard_tot = standard_items * standard_price
+        bill_tot.append(bill_tot)
+        item_offers = bill['offers']
+        for o in item_offers:
+            items = item_offers['items']
+            price = item_offers['price']
+            bill_tot.append(items * price)
+    return sum(bill_tot)
 
 def checkout(skus):
     skus = sorted([c for c in skus])
