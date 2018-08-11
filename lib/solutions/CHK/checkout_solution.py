@@ -51,36 +51,34 @@ def any_of_three(skus, bill):
         'Y': 20,
         'Z': 21,
     }
-    skus = sorted(skus, key=lambda x: price_lookup[x], reverse=True)
-    skus_copy = [i for i in skus]
-    def pop_items(skus_copy, items_to_pop):
+    target_skus = sorted([i for i in skus if i in 'STXYZ'] , key=lambda x: price_lookup.get(x, 0), reverse=True)
+    def pop_items(items_to_pop):
         for i in items_to_pop:
-            skus_copy.pop(skus_copy.index(i))
-        return skus_copy
+            skus.pop(skus.index(i))
     count = 0
     tot = 0
     to_pop = []
     last_item = None
-    if len(skus) >= 3 and any(c in 'STXYZ' for c in skus):
-        for item in skus:
-            if item in 'STXYZ':
-                if item not in bill:
-                    bill[item] = {
-                        'standard':
-                            {'items': 0, 'price': 0},
-                        'offers': [],
-                    }
-                count += 1
-                to_pop.append(item)
-            if count == 3:
-                count = 0
-                tot += 1
-                last_item = item
-                skus_copy = pop_items(skus_copy, to_pop)
-                to_pop = []
+    for item in target_skus:
+        if item in 'STXYZ':
+            if item not in bill:
+                bill[item] = {
+                    'standard':
+                        {'items': 0, 'price': 0},
+                    'offers': [],
+                }
+            count += 1
+            to_pop.append(item)
+        if count == 3:
+            count = 0
+            tot += 1
+            last_item = item
+            pop_items(to_pop)
+            to_pop = []
     if last_item is not None:
         bill[last_item]['offers'].append({'items': tot, 'price': 45})
-    return skus_copy, bill
+    return skus, bill
+
 
 def process_bill(bill):
     bill_tot = list()
@@ -177,3 +175,4 @@ def checkout(skus):
 
     return process_bill(bill)
 
+print(checkout("ABCDEFGHIJKLMNOPQRSTUVW"))
