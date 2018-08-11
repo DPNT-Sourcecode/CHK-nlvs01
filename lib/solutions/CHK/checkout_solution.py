@@ -21,7 +21,6 @@ def remove_free_items(skus):
             if free_item in skus:
                 skus.pop(skus.index(free_item))
     for s in set(skus):
-        offer_quantity, free_item = 0, None
         quantity = skus.count(s)
         if s == 'E':
             offer_quantity = 2
@@ -63,10 +62,7 @@ def checkout(skus):
     skus = remove_free_items(skus)
     for s in set(skus):
         quantity = skus.count(s)
-        unit_price = 0
         offers = tuple()
-        offer_quantity = 0
-        free_item = None
         bill[s] = {
             'standard':
                 {'items': 0, 'price': 0},
@@ -83,12 +79,8 @@ def checkout(skus):
         elif s == 'D':
             unit_price = 15
         elif s == 'E':
-            offer_quantity = 2
-            free_item = 'B'
             unit_price = 40
         elif s == 'F':
-            offer_quantity = 3
-            free_item = 'F'
             unit_price = 10
         elif s == 'G':
             unit_price = 20
@@ -108,8 +100,6 @@ def checkout(skus):
             unit_price = 15
         elif s == 'N':
             unit_price = 40
-            offer_quantity = 3
-            free_item = 'M'
         elif s == 'O':
             unit_price = 10
         elif s == 'P':
@@ -120,16 +110,12 @@ def checkout(skus):
             offers = ((3, 80),)
         elif s == 'R':
             unit_price = 50
-            offer_quantity = 3
-            free_item = 'Q'
         elif s == 'S':
             unit_price = 30
         elif s == 'T':
             unit_price = 20
         elif s == 'U':
             unit_price = 40
-            offer_quantity = 4
-            free_item = 'U'
         elif s == 'V':
             unit_price = 50
             offers = ((3, 130), (2, 90))
@@ -147,7 +133,3 @@ def checkout(skus):
         bill[s]['standard']['items'] = quantity
         bill[s]['standard']['price'] = unit_price
     return process_bill(bill)
-
-
-
-checkout('EEEEBB')
