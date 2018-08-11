@@ -40,6 +40,8 @@ def checkout(skus):
                     offer_price = offer_items * item['offer']['price']
                     normal_price = normal_items * item['price']
                     item_price = sum([normal_price, offer_price])
+                else:
+                    item_price = item['price'] * quantity
             else:
                 item_price = item['price'] * quantity
             prices.append(item_price)
