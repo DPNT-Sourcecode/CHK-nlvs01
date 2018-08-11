@@ -3,59 +3,121 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 
-def get_free_items(skus_items, offer_type, offer_quantity, free_item):
-    """
-    :param skus_item: skus items list
-    :param offer_type: the type of item that defines the offer
-    :param offer_quantity: the quanity of the item that defines the offer
-    :param free_item: the item to remove from skus_items
-    :return: new skus_items list without the items on offer
-    """
-    to_remove = offer_quantity / 2
-    for i in range(to_remove):
-        if free_item in skus_items:
-            skus_items.pop(skus_items.index(free_item))
-    return skus_items
 
+def calculate_offers(bill, item, quantity, offers):
+    bill = bill.copy()
+    for offer, price in offers:
+        bill[item]['offers'].append(
+            {'items': quantity / offer, 'price': price}
+        )
+        quantity = quantity % offer
+    return bill, quantity
+
+
+def get_free_item(bill, quantity, offer_quantity, free_item):
+    bill = bill.copy()
+    if free_item in bill:
+        to_remove = quantity / offer_quantity
+        new_quantity = bill[free_item]['standard']['items'] - to_remove
+        if new_quantity > 0:
+            bill[free_item]['standard']['items'] = new_quantity
+        else:
+            bill[free_item]['standard']['items'] = 0
+    return bill
+
+def process_bill(bill):
+    print(0)
 
 def checkout(skus):
     skus = sorted([c for c in skus])
     bill = dict()
     for s in set(skus):
         quantity = skus.count(s)
+        unit_price = 0
+        offers = tuple()
+        offer_quantity = 0
+        free_item = None
+        bill[s] = {
+            'standard':
+                {'items': 0, 'price': 0},
+            'offers': [],
+        }
         if s == 'A':
-            if quantity / 5 > 0:
-                bill[s] = {'offers': [
-                    {'items': quantity / 5, 'price': 130}
-                ]}
-                quantity = quantity % 5
-            if quantity / 3 > 0:
-                offer_three = quantity / 3
-                quantity = quantity % 3
-            prices.append(sum([offer_five * 200, offer_three * 130, quantity * 50]))
+            unit_price = 50
+            offers = ((3, 130), (5, 200))
         elif s == 'B':
-            offer_two = 0
-            if quantity >= 2:
-                offer_two = quantity / 2
-                quantity = quantity % 2
-            prices.append(sum([offer_two * 45, quantity * 30]))
+            unit_price = 30
+            offers = ((2, 45),)
         elif s == 'C':
             unit_price = 20
-            tot_price = unit_price
         elif s == 'D':
             unit_price = 15
         elif s == 'E':
+            offer_quantity = 2
+            free_item = 'B'
             unit_price = 40
         elif s == 'F':
+            offer_quantity = 3
+            free_item = 'F'
             unit_price = 10
         elif s == 'G':
             unit_price = 20
-        elif s == 'F':
+        elif s == 'H':
             unit_price = 10
-
+            offers = ((5, 45), (10, 80))
+        elif s == 'I':
+            unit_price = 35
+        elif s == 'J':
+            unit_price = 60
+        elif s == 'K':
+            unit_price = 80
+            offers = ((2, 150),)
+        elif s == 'L':
+            unit_price = 90
+        elif s == 'M':
+            unit_price = 15
+        elif s == 'N':
+            unit_price = 40
+            offer_quantity = 3
+            free_item = 'M'
+        elif s == 'O':
+            unit_price = 10
+        elif s == 'P':
+            unit_price = 50
+            offers = ((5, 200), )
+        elif s == 'Q':
+            unit_price = 30
+            offers = ((3, 80),)
+        elif s == 'R':
+            unit_price = 50
+            offer_quantity = 3
+            free_item = 'Q'
+        elif s == 'S':
+            unit_price = 30
+        elif s == 'T':
+            unit_price = 20
+        elif s == 'U':
+            unit_price = 40
+            offer_quantity = 3
+            free_item = 'U'
+        elif s == 'V':
+            unit_price = 40
+            offers = ((2, 90), (3, 130))
+        elif s == 'W':
+            unit_price = 20
+        elif s == 'X':
+            unit_price = 90
+        elif s == 'Y':
+            unit_price = 10
+        elif s == 'Z':
+            unit_price = 50
         else:
             return -1
-    return sum(prices)
+        bill, quantity = calculate_offers(bill, s, quantity, offers)
+        bill[s]['standard']['items'] = quantity
+        bill[s]['standard']['price'] = unit_price
+        bill = get_free_item(bill, quantity, offer_quantity, free_item)
+    return process_bill(bill)
 
 
-checkout('EEEB')
+print(checkout('EEEB'))
