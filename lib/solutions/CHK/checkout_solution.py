@@ -67,7 +67,6 @@ def any_of_three(skus, bill):
             if count == 3:
                 count = 0
                 tot += 1
-                last_item = item
                 skus_copy = pop_items(skus_copy, to_pop)
                 to_pop = []
     if last_item is not None:
