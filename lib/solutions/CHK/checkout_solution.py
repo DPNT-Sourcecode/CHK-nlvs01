@@ -44,7 +44,14 @@ def remove_free_items(skus):
 
 
 def any_of_three(skus, bill):
-    skus_copy = [i for i in skus]
+    price_lookup = {
+        'S': 20,
+        'T': 20,
+        'X': 17,
+        'Y': 20,
+        'Z': 21,
+    }
+    skus_copy = sorted([i for i in skus], key=lambda x: price_lookup[x], reverse=True)
     def pop_items(skus_copy, items_to_pop):
         for i in items_to_pop:
             skus_copy.pop(skus_copy.index(i))
@@ -52,6 +59,7 @@ def any_of_three(skus, bill):
     count = 0
     tot = 0
     to_pop = []
+    last_item = None
     if len(skus) >= 3 and any(c in 'STXYZ' for c in skus):
         for item in skus:
             if item in 'STXYZ':
@@ -66,8 +74,10 @@ def any_of_three(skus, bill):
             if count == 3:
                 count = 0
                 tot += 1
+                last_item = item
                 skus_copy = pop_items(skus_copy, to_pop)
                 to_pop = []
+    if last_item is not None:
         bill[last_item]['offers'].append({'items': tot, 'price': 45})
     return skus_copy, bill
 
