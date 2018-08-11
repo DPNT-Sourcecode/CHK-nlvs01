@@ -27,7 +27,8 @@ def checkout(skus):
 
     }
     prices = []
-    for s in set(skus):
+    skus_lower = skus.lower()
+    for s in set(skus_lower):
         quantity = skus.count(s)
         item = skus_lookup[s]
         item_price = 0
