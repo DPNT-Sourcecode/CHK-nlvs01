@@ -89,7 +89,86 @@ def process_bill(bill):
 
 
 def checkout(skus):
-    return 1
+    if not skus:
+        return -1
+    skus = sorted([c for c in skus])
+    bill = dict()
+    skus = remove_free_items(skus)
+    skus, bill = any_of_three(skus, bill)
+    for s in set(skus):
+        quantity = skus.count(s)
+        offers = tuple()
+        bill[s] = {
+            'standard':
+                {'items': 0, 'price': 0},
+            'offers': [],
+        }
+        if s == 'A':
+            unit_price = 50
+            offers = ((5, 200), (3, 130))
+        elif s == 'B':
+            unit_price = 30
+            offers = ((2, 45),)
+        elif s == 'C':
+            unit_price = 20
+        elif s == 'D':
+            unit_price = 15
+        elif s == 'E':
+            unit_price = 40
+        elif s == 'F':
+            unit_price = 10
+        elif s == 'G':
+            unit_price = 20
+        elif s == 'H':
+            unit_price = 10
+            offers = ((10, 80), (5, 45))
+        elif s == 'I':
+            unit_price = 35
+        elif s == 'J':
+            unit_price = 60
+        elif s == 'K':
+            unit_price = 70
+            offers = ((2, 120),)
+        elif s == 'L':
+            unit_price = 90
+        elif s == 'M':
+            unit_price = 15
+        elif s == 'N':
+            unit_price = 40
+        elif s == 'O':
+            unit_price = 10
+        elif s == 'P':
+            unit_price = 50
+            offers = ((5, 200), )
+        elif s == 'Q':
+            unit_price = 30
+            offers = ((3, 80),)
+        elif s == 'R':
+            unit_price = 50
+        elif s == 'S':
+            unit_price = 20
+        elif s == 'T':
+            unit_price = 20
+        elif s == 'U':
+            unit_price = 40
+        elif s == 'V':
+            unit_price = 50
+            offers = ((3, 130), (2, 90))
+        elif s == 'W':
+            unit_price = 20
+        elif s == 'X':
+            unit_price = 17
+        elif s == 'Y':
+            unit_price = 20
+        elif s == 'Z':
+            unit_price = 21
+        else:
+            return -1
+        bill, quantity = calculate_offers(bill, s, quantity, offers)
+        bill[s]['standard']['items'] = quantity
+        bill[s]['standard']['price'] = unit_price
+
+    return process_bill(bill)
 
 
 checkout("")
