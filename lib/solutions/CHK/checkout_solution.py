@@ -47,14 +47,14 @@ def any_of_three(skus, bill):
     skus_copy = [i for i in skus]
     def pop_items(skus_copy, items_to_pop):
         for i in items_to_pop:
-            skus_copy.pop(skus.index(i))
+            skus_copy.pop(skus_copy.index(i))
         return skus_copy
     count = 0
     tot = 0
     to_pop = []
     last_item = None
     if len(skus) >= 3 and any(c in 'STXYZ' for c in skus):
-        for i, item in enumerate(skus):
+        for item in skus:
             if item in 'STXYZ':
                 if item not in bill:
                     bill[item] = {
@@ -63,7 +63,7 @@ def any_of_three(skus, bill):
                         'offers': [],
                     }
                 count += 1
-                to_pop.append(i)
+                to_pop.append(item)
             if count == 3:
                 count = 0
                 tot += 1
@@ -168,4 +168,4 @@ def checkout(skus):
     return process_bill(bill)
 
 
-print(checkout("ABCDEFGHIJKLMNOPQRSTUVW"))
+print(checkout("STXSTX"))
