@@ -11,8 +11,8 @@ def checkout(skus):
             for i in range(to_remove):
                 if 'B' in skus:
                     skus.pop(skus.index('B'))
-        if s == 'F' and quantity / 2 > 0:
-            to_remove = quantity / 2
+        if s == 'F' and quantity / 3 > 0:
+            to_remove = quantity / 3
             for i in range(to_remove):
                 if 'F' in skus:
                     skus.pop(skus.index('F'))
