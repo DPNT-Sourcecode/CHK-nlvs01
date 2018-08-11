@@ -48,6 +48,3 @@ def checkout(skus):
         else:
             prices.append(-1)
     return sum(prices)
-
-
-checkout('AAABBACC')
