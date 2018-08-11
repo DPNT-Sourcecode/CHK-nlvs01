@@ -112,7 +112,7 @@ def checkout(skus):
         elif s == 'R':
             unit_price = 50
         elif s == 'S':
-            unit_price = 30
+            unit_price = 20
         elif s == 'T':
             unit_price = 20
         elif s == 'U':
@@ -123,11 +123,11 @@ def checkout(skus):
         elif s == 'W':
             unit_price = 20
         elif s == 'X':
-            unit_price = 90
+            unit_price = 17
         elif s == 'Y':
-            unit_price = 10
+            unit_price = 20
         elif s == 'Z':
-            unit_price = 50
+            unit_price = 21
         else:
             return -1
         if s in ('S', 'T', 'X', 'Y', 'Z'):
