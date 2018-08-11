@@ -23,7 +23,7 @@ def checkout(skus):
                 if quantity / 3 > 0:
                     offer_three = quantity / 3
                     quantity = quantity % 3
-            prices.append(sum([offer_five * 200, offer_three * 150, quantity *  50]))
+            prices.append(sum([offer_five * 200, offer_three * 130, quantity * 50]))
         elif s == 'B':
             offer_two = 0
             if quantity >= 2:
