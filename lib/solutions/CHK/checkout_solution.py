@@ -59,8 +59,8 @@ def process_bill(bill):
 
 def checkout(skus):
     skus = sorted([c for c in skus])
-    bill = dict()
     skus = remove_free_items(skus)
+    skus, bill = process_
     for s in set(skus):
         quantity = skus.count(s)
         offers = tuple()
@@ -130,8 +130,6 @@ def checkout(skus):
             unit_price = 21
         else:
             return -1
-        if s in ('S', 'T', 'X', 'Y', 'Z'):
-            offers = ((3, 45),)
         bill, quantity = calculate_offers(bill, s, quantity, offers)
         bill[s]['standard']['items'] = quantity
         bill[s]['standard']['price'] = unit_price
