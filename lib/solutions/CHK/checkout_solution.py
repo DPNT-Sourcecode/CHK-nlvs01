@@ -48,19 +48,22 @@ def any_of_three(skus, bill):
         for ix in indexes:
             skus.pop(ix)
     count = 0
+    tot = 0
     indexes = []
     for i, item in enumerate(skus):
         if item in 'STXYZ':
-            count += 0
+            bill[item] = {
+                'standard':
+                    {'items': 0, 'price': 0},
+                'offers': [],
+            }
+            count += 1
             indexes.append(i)
         if count == 3:
             count = 0
+            tot += 1
             pop_items(indexes)
-        bill[item] = {
-            'standard':
-                {'items': 0, 'price': 0},
-            'offers': [{'items': 1, 'price': 45}],
-        }
+            bill[item]['offers'].append({'items': 1, 'price': 45})
     return skus, bill
 
 def process_bill(bill):
