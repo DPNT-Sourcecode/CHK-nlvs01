@@ -4,6 +4,7 @@
 # skus = unicode string
 def checkout(skus):
     for s in set(skus):
+        skus_list =
         quantity = skus.count(s)
         if s == 'E' and quantity % 2 == 0 and 'B' in skus:
             to_remove = quantity / 2
